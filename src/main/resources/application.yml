@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/restdb?useUnicode=true&characterEncoding=utf8
-    username: ying
-    password: password
+    url: jdbc:mysql://localhost:3306/testdb?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: mysqlita8
   jpa:
     hibernate:
       ddl-auto: update
