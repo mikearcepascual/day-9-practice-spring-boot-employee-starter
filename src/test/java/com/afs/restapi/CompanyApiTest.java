@@ -121,8 +121,6 @@ class CompanyApiTest {
         companyJpaRepository.save(company);
         Employee employee = getEmployee(company);
         employeeJpaRepository.save(employee);
-        Employee employee1 = getEmployee1(company);
-        employeeJpaRepository.save(employee1);
 
         mockMvc.perform(get("/companies/{id}", company.getId()))
                 .andExpect(MockMvcResultMatchers.status().is(200))
