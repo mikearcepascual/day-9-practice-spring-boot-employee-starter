@@ -2,7 +2,7 @@ package com.afs.restapi.service;
 
 import com.afs.restapi.entity.Employee;
 import com.afs.restapi.exception.EmployeeNotFoundException;
-import com.afs.restapi.repository.EmployeeJpaRepository;
+import com.afs.restapi.repository.EmployeeRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +11,18 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-    private final EmployeeJpaRepository employeeJpaRepository;
+    private final EmployeeRepository employeeRepository;
 
-    public EmployeeService(EmployeeJpaRepository employeeJpaRepository) {
-        this.employeeJpaRepository = employeeJpaRepository;
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     public List<Employee> findAll() {
-        return employeeJpaRepository.findAll();
+        return employeeRepository.findAll();
     }
 
     public Employee findById(Long id) {
-        return employeeJpaRepository.findById(id)
+        return employeeRepository.findById(id)
                 .orElseThrow(EmployeeNotFoundException::new);
     }
 
@@ -34,22 +34,22 @@ public class EmployeeService {
         if (employee.getAge() != null) {
             toBeUpdatedEmployee.setAge(employee.getAge());
         }
-        employeeJpaRepository.save(toBeUpdatedEmployee);
+        employeeRepository.save(toBeUpdatedEmployee);
     }
 
     public List<Employee> findAllByGender(String gender) {
-        return employeeJpaRepository.findAllByGender(gender);
+        return employeeRepository.findAllByGender(gender);
     }
 
     public Employee create(Employee employee) {
-        return employeeJpaRepository.save(employee);
+        return employeeRepository.save(employee);
     }
 
     public List<Employee> findByPage(Integer pageNumber, Integer pageSize) {
-        return employeeJpaRepository.findAll(PageRequest.of(pageNumber - 1, pageSize)).toList();
+        return employeeRepository.findAll(PageRequest.of(pageNumber - 1, pageSize)).toList();
     }
 
     public void delete(Long id) {
-        employeeJpaRepository.deleteById(id);
+        employeeRepository.deleteById(id);
     }
 }
